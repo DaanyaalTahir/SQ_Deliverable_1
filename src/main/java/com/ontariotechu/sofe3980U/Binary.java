@@ -171,7 +171,6 @@ public class Binary
 		String[] matchedBinaryStrings = matchTwoBinaryLengths(num1, num2);
 		String num1Str = matchedBinaryStrings[0], num2Str = matchedBinaryStrings[1];
 		Binary result = new Binary("0");
-		ArrayList<Binary> numsToAdd = new ArrayList<Binary>(); 
 
 		// Loop through the first number starting from the right side
 		for(int i=num1Str.length()-1; i>=0; i--){
@@ -188,14 +187,9 @@ public class Binary
 					curNum = "0" + curNum;
 				}
 			}
-			// After we get the result of the first iteration, add it to an array to add later
-			numsToAdd.add(new Binary(curNum));
+			// After we get the result of the first iteration, add it to the result
+			result = Binary.add(new Binary(curNum), result);	
 		}
-
-		// Loop through every number of the array which contains the numbers to add, and add them
-		for (Binary num : numsToAdd) { 		      
-           	result = Binary.add(num, result);	
-      	}
 
 		return result;
 	}
