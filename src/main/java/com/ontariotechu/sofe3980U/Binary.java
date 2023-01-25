@@ -1,5 +1,5 @@
 package com.ontariotechu.sofe3980U;
-import java.util.ArrayList;
+
 /**
  * Unsigned integer Binary variable
  *
