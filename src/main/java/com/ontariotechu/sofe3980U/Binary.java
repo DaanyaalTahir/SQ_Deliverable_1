@@ -165,33 +165,24 @@ public class Binary
 	* @param num2 The second binary object to multiply 
 	* @return Result of multiplying both binary objects
 	*/
-	public static Binary multiply(Binary num1, Binary num2)
-	{
+	public static Binary multiply(Binary num1, Binary num2) {
 		// Initialize variables
-		String[] matchedBinaryStrings = matchTwoBinaryLengths(num1, num2);
-		String num1Str = matchedBinaryStrings[0], num2Str = matchedBinaryStrings[1];
-		Binary result = new Binary("0");
+		int ind2 = num2.number.length() - 1;
+		String num3 = "0";
+		Binary result = new Binary(num3);
 
-		// Loop through the first number starting from the right side
-		for(int i=num1Str.length()-1; i>=0; i--){
-			// Add the appropiate zeros to the right end of the result for the first iteration
-			String curNum = new String(new char[num1Str.length()-1-i]).replace("\0", "0");
+		// Loop through the length of second num
+		while (ind2 >= 0) {
+			// Add extra zero at end depending on bit position
+			int bit = (num2.number.charAt(ind2) == '1') ? 1 : 0;
 
-			// For every bit of the first number, loop through every bit of the second number and multiply them
-			// which is virtually the same as "AND'ing" them
-			for(int j=num2Str.length()-1; j>=0; j--){
-				if(num1Str.charAt(i) == num2Str.charAt(j)){
-					curNum = num1Str.charAt(i) + curNum;
-				}
-				else{
-					curNum = "0" + curNum;
-				}
+			if (bit == 1) {
+				result = add(result, num1); // Add partial products together
 			}
-			// After we get the result of the first iteration, add it to the result
-			result = Binary.add(new Binary(curNum), result);	
+			num1.number += "0"; 
+			ind2--; // Decrement variable
 		}
-
-		return result;
+		return result; // return the result
 	}
 
 }	
